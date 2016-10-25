@@ -1,0 +1,119 @@
+<div class="btn-group">
+	<button type="button" class="btn btn-default" ng-click="nuevo()">Nuevo CarroCompra</button>
+	<button type="button" class="btn btn-default" ng-click="cancelar()">Listar CarroCompra</button>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="">Reporte CarroCompra</button>
+</div>
+				
+<div class="panel panel-primary" ng-hide="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de CarroCompra</div>
+    <div class="panel-body">
+        <table class="resultados table table-striped">
+            <tr>
+                				<th>
+                                    valor_total
+                                </th>				<th>
+                                    cantidad_producto
+                                </th>				<th>
+                                    fecha_compra
+                                </th>				<th>
+                                    estado_compra
+                                </th>
+								<th>
+				                    cliente
+				                </th>
+				<th>
+                    &nbsp;
+                </th>
+            </tr>
+            <tr ng-repeat="row in lista">
+                		<td class="row">{{row.valor_total}}</td>
+                		<td class="row">{{row.cantidad_producto}}</td>
+                		<td class="row">{{row.fecha_compra| date: 'dd/MM/yyyy'}}</td>
+                		<td class="row">{{row.estado_compra}}</td>
+                
+					<td class="row">{{row.cliente.nombre}}</td>              
+				<td class="row">
+                    <button type="button" class="btn btn-default" ng-click="editar(row)">
+                        <span class="glyphicon glyphicon-pencil"></span>Editar
+                    </button>
+					<button type="button" class="btn btn-default" ng-click="eliminar(row)">
+                        <span class="glyphicon glyphicon-remove"></span>Eliminar
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-show="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de CarroCompra</div>
+    <div class="panel-body">
+        <form role="form" id="formularioEditar">
+            				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="valor_total">valor_total</label>
+                                    <input id="valor_total" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.valor_total"
+            							   placeholder="valor_total"/>
+                                    <div ng-show="errores.valor_total">{{errores.valor_total}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="cantidad_producto">cantidad_producto</label>
+                                    <input id="cantidad_producto" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.cantidad_producto"
+            							   placeholder="cantidad_producto"/>
+                                    <div ng-show="errores.cantidad_producto">{{errores.cantidad_producto}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="fecha_compra">fecha_compra</label>
+            						<div class="input-group">
+            	                        <input id="fecha_compra" 
+            	                               class="form-control datepicker" 
+            	                               type="text" 
+            	                               ng-model="datosFormulario.fecha_compra"/>
+            							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                	</div>
+                                    <script>
+                                                var dp_fecha_compra = $('#fecha_compra').datepicker({format: 'dd/mm/yyyy'}).on('changeDate', function (ev) {
+                                                    dp_fecha_compra.hide();
+                                                }).data('datepicker');
+                                    </script>
+                                    <div ng-show="errores.fecha_compra">{{errores.fecha_compra}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="estado_compra">estado_compra</label>
+                                    <input id="estado_compra" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.estado_compra"
+            							   placeholder="estado_compra"/>
+                                    <div ng-show="errores.estado_compra">{{errores.estado_compra}}</div>
+                                </div>
+                            </div> 
+							<div class="row">
+			                    <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+			                        <label>cliente</label>
+									<select id="cliente" class="form-control" 
+			                            ng-model="datosFormulario.cliente"
+			                            ng-options="option.nombre for option in listaCliente track by option.id">
+			                    	</select>
+			                        <div ng-show="errores.cliente">{{errores.cliente}}</div>
+			                    </div>
+			                </div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="guardar()" ng-show="nuevoRegistro">Guardar</button>
+                <button type="button" class="btn btn-default" ng-click="guardar()" ng-show="!nuevoRegistro">Aceptar</button>
+                <button type="button" class="btn btn-default" ng-click="cancelar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

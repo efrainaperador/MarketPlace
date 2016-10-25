@@ -1,0 +1,110 @@
+<div class="btn-group">
+	<button type="button" class="btn btn-default" ng-click="nuevo()">Nuevo Direccion</button>
+	<button type="button" class="btn btn-default" ng-click="cancelar()">Listar Direccion</button>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="">Reporte Direccion</button>
+</div>
+				
+<div class="panel panel-primary" ng-hide="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Direccion</div>
+    <div class="panel-body">
+        <table class="resultados table table-striped">
+            <tr>
+                				<th>
+                                    direccion
+                                </th>				<th>
+                                    ciudad
+                                </th>				<th>
+                                    descripcion
+                                </th>
+								<th>
+				                    ciudad
+				                </th>				<th>
+				                    cliente
+				                </th>
+				<th>
+                    &nbsp;
+                </th>
+            </tr>
+            <tr ng-repeat="row in lista">
+                		<td class="row">{{row.direccion}}</td>
+                		<td class="row">{{row.ciudad}}</td>
+                		<td class="row">{{row.descripcion}}</td>
+                
+					<td class="row">{{row.cliente.nombre}}</td>              	<td class="row">{{row.ciudad.nombre}}</td>              
+				<td class="row">
+                    <button type="button" class="btn btn-default" ng-click="editar(row)">
+                        <span class="glyphicon glyphicon-pencil"></span>Editar
+                    </button>
+					<button type="button" class="btn btn-default" ng-click="eliminar(row)">
+                        <span class="glyphicon glyphicon-remove"></span>Eliminar
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-show="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Direccion</div>
+    <div class="panel-body">
+        <form role="form" id="formularioEditar">
+            				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="direccion">direccion</label>
+                                    <input id="direccion" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.direccion"
+            							   placeholder="direccion"/>
+                                    <div ng-show="errores.direccion">{{errores.direccion}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="ciudad">ciudad</label>
+                                    <input id="ciudad" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.ciudad"
+            							   placeholder="ciudad"/>
+                                    <div ng-show="errores.ciudad">{{errores.ciudad}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="descripcion">descripcion</label>
+                                    <input id="descripcion" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.descripcion"
+            							   placeholder="descripcion"/>
+                                    <div ng-show="errores.descripcion">{{errores.descripcion}}</div>
+                                </div>
+                            </div> 
+							<div class="row">
+			                    <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+			                        <label>cliente</label>
+									<select id="cliente" class="form-control" 
+			                            ng-model="datosFormulario.cliente"
+			                            ng-options="option.nombre for option in listaCliente track by option.id">
+			                    	</select>
+			                        <div ng-show="errores.cliente">{{errores.cliente}}</div>
+			                    </div>
+			                </div>				<div class="row">
+			                    <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+			                        <label>ciudad</label>
+									<select id="ciudad" class="form-control" 
+			                            ng-model="datosFormulario.ciudad"
+			                            ng-options="option.nombre for option in listaCiudad track by option.id">
+			                    	</select>
+			                        <div ng-show="errores.ciudad">{{errores.ciudad}}</div>
+			                    </div>
+			                </div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="guardar()" ng-show="nuevoRegistro">Guardar</button>
+                <button type="button" class="btn btn-default" ng-click="guardar()" ng-show="!nuevoRegistro">Aceptar</button>
+                <button type="button" class="btn btn-default" ng-click="cancelar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

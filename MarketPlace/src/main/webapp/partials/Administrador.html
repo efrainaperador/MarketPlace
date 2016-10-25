@@ -1,0 +1,75 @@
+<div class="btn-group">
+	<button type="button" class="btn btn-default" ng-click="nuevo()">Nuevo Administrador</button>
+	<button type="button" class="btn btn-default" ng-click="cancelar()">Listar Administrador</button>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="">Reporte Administrador</button>
+</div>
+				
+<div class="panel panel-primary" ng-hide="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Administrador</div>
+    <div class="panel-body">
+        <table class="resultados table table-striped">
+            <tr>
+                				<th>
+                                    usuario
+                                </th>				<th>
+                                    password
+                                </th>
+				
+				<th>
+                    &nbsp;
+                </th>
+            </tr>
+            <tr ng-repeat="row in lista">
+                		<td class="row">{{row.usuario}}</td>
+                		<td class="row">{{row.password}}</td>
+                
+				
+				<td class="row">
+                    <button type="button" class="btn btn-default" ng-click="editar(row)">
+                        <span class="glyphicon glyphicon-pencil"></span>Editar
+                    </button>
+					<button type="button" class="btn btn-default" ng-click="eliminar(row)">
+                        <span class="glyphicon glyphicon-remove"></span>Eliminar
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-show="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Administrador</div>
+    <div class="panel-body">
+        <form role="form" id="formularioEditar">
+            				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="usuario">usuario</label>
+                                    <input id="usuario" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.usuario"
+            							   placeholder="usuario"/>
+                                    <div ng-show="errores.usuario">{{errores.usuario}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="password">password</label>
+                                    <input id="password" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.password"
+            							   placeholder="password"/>
+                                    <div ng-show="errores.password">{{errores.password}}</div>
+                                </div>
+                            </div> 
+			
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="guardar()" ng-show="nuevoRegistro">Guardar</button>
+                <button type="button" class="btn btn-default" ng-click="guardar()" ng-show="!nuevoRegistro">Aceptar</button>
+                <button type="button" class="btn btn-default" ng-click="cancelar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

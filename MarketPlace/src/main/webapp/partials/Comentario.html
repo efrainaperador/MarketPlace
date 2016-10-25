@@ -1,0 +1,84 @@
+<div class="btn-group">
+	<button type="button" class="btn btn-default" ng-click="nuevo()">Nuevo Comentario</button>
+	<button type="button" class="btn btn-default" ng-click="cancelar()">Listar Comentario</button>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="">Reporte Comentario</button>
+</div>
+				
+<div class="panel panel-primary" ng-hide="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Comentario</div>
+    <div class="panel-body">
+        <table class="resultados table table-striped">
+            <tr>
+                				<th>
+                                    comentario
+                                </th>
+								<th>
+				                    producto
+				                </th>				<th>
+				                    cliente
+				                </th>
+				<th>
+                    &nbsp;
+                </th>
+            </tr>
+            <tr ng-repeat="row in lista">
+                		<td class="row">{{row.comentario}}</td>
+                
+					<td class="row">{{row.producto.nombre}}</td>              	<td class="row">{{row.cliente.nombre}}</td>              
+				<td class="row">
+                    <button type="button" class="btn btn-default" ng-click="editar(row)">
+                        <span class="glyphicon glyphicon-pencil"></span>Editar
+                    </button>
+					<button type="button" class="btn btn-default" ng-click="eliminar(row)">
+                        <span class="glyphicon glyphicon-remove"></span>Eliminar
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-show="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Comentario</div>
+    <div class="panel-body">
+        <form role="form" id="formularioEditar">
+            				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="comentario">comentario</label>
+                                    <input id="comentario" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.comentario"
+            							   placeholder="comentario"/>
+                                    <div ng-show="errores.comentario">{{errores.comentario}}</div>
+                                </div>
+                            </div> 
+							<div class="row">
+			                    <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+			                        <label>cliente</label>
+									<select id="cliente" class="form-control" 
+			                            ng-model="datosFormulario.cliente"
+			                            ng-options="option.nombre for option in listaCliente track by option.id">
+			                    	</select>
+			                        <div ng-show="errores.cliente">{{errores.cliente}}</div>
+			                    </div>
+			                </div>				<div class="row">
+			                    <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+			                        <label>producto</label>
+									<select id="producto" class="form-control" 
+			                            ng-model="datosFormulario.producto"
+			                            ng-options="option.nombre for option in listaProducto track by option.id">
+			                    	</select>
+			                        <div ng-show="errores.producto">{{errores.producto}}</div>
+			                    </div>
+			                </div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="guardar()" ng-show="nuevoRegistro">Guardar</button>
+                <button type="button" class="btn btn-default" ng-click="guardar()" ng-show="!nuevoRegistro">Aceptar</button>
+                <button type="button" class="btn btn-default" ng-click="cancelar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

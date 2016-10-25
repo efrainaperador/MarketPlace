@@ -1,0 +1,145 @@
+<div class="btn-group">
+	<button type="button" class="btn btn-default" ng-click="nuevo()">Nuevo Cliente</button>
+	<button type="button" class="btn btn-default" ng-click="cancelar()">Listar Cliente</button>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="">Reporte Cliente</button>
+</div>
+				
+<div class="panel panel-primary" ng-hide="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Cliente</div>
+    <div class="panel-body">
+        <table class="resultados table table-striped">
+            <tr>
+                				<th>
+                                    usuario
+                                </th>				<th>
+                                    password
+                                </th>				<th>
+                                    nombre
+                                </th>				<th>
+                                    apellido
+                                </th>				<th>
+                                    fecha_nacimiento
+                                </th>				<th>
+                                    email
+                                </th>
+								<th>
+				                    documento
+				                </th>
+				<th>
+                    &nbsp;
+                </th>
+            </tr>
+            <tr ng-repeat="row in lista">
+                		<td class="row">{{row.usuario}}</td>
+                		<td class="row">{{row.password}}</td>
+                		<td class="row">{{row.nombre}}</td>
+                		<td class="row">{{row.apellido}}</td>
+                		<td class="row">{{row.fecha_nacimiento| date: 'dd/MM/yyyy'}}</td>
+                		<td class="row">{{row.email}}</td>
+                
+					<td class="row">{{row.documento.nombre}}</td>              
+				<td class="row">
+                    <button type="button" class="btn btn-default" ng-click="editar(row)">
+                        <span class="glyphicon glyphicon-pencil"></span>Editar
+                    </button>
+					<button type="button" class="btn btn-default" ng-click="eliminar(row)">
+                        <span class="glyphicon glyphicon-remove"></span>Eliminar
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-show="panelEditar">
+    <div class="panel-heading">Parametrizaci&oacute;n de Cliente</div>
+    <div class="panel-body">
+        <form role="form" id="formularioEditar">
+            				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="usuario">usuario</label>
+                                    <input id="usuario" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.usuario"
+            							   placeholder="usuario"/>
+                                    <div ng-show="errores.usuario">{{errores.usuario}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="password">password</label>
+                                    <input id="password" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.password"
+            							   placeholder="password"/>
+                                    <div ng-show="errores.password">{{errores.password}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="nombre">nombre</label>
+                                    <input id="nombre" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.nombre"
+            							   placeholder="nombre"/>
+                                    <div ng-show="errores.nombre">{{errores.nombre}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="apellido">apellido</label>
+                                    <input id="apellido" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.apellido"
+            							   placeholder="apellido"/>
+                                    <div ng-show="errores.apellido">{{errores.apellido}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="fecha_nacimiento">fecha_nacimiento</label>
+            						<div class="input-group">
+            	                        <input id="fecha_nacimiento" 
+            	                               class="form-control datepicker" 
+            	                               type="text" 
+            	                               ng-model="datosFormulario.fecha_nacimiento"/>
+            							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                	</div>
+                                    <script>
+                                                var dp_fecha_nacimiento = $('#fecha_nacimiento').datepicker({format: 'dd/mm/yyyy'}).on('changeDate', function (ev) {
+                                                    dp_fecha_nacimiento.hide();
+                                                }).data('datepicker');
+                                    </script>
+                                    <div ng-show="errores.fecha_nacimiento">{{errores.fecha_nacimiento}}</div>
+                                </div>
+                            </div>				<div class="row">
+                                <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+                                    <label for="email">email</label>
+                                    <input id="email" 
+                                           class="form-control" 
+            							   type="text"
+                                           ng-model="datosFormulario.email"
+            							   placeholder="email"/>
+                                    <div ng-show="errores.email">{{errores.email}}</div>
+                                </div>
+                            </div> 
+							<div class="row">
+			                    <div class="form-group col-md-6" ng-class="errores.idAseg?'error':''">
+			                        <label>documento</label>
+									<select id="documento" class="form-control" 
+			                            ng-model="datosFormulario.documento"
+			                            ng-options="option.nombre for option in listaDocumento track by option.id">
+			                    	</select>
+			                        <div ng-show="errores.documento">{{errores.documento}}</div>
+			                    </div>
+			                </div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="guardar()" ng-show="nuevoRegistro">Guardar</button>
+                <button type="button" class="btn btn-default" ng-click="guardar()" ng-show="!nuevoRegistro">Aceptar</button>
+                <button type="button" class="btn btn-default" ng-click="cancelar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

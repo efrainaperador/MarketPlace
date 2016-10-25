@@ -1,0 +1,19 @@
+.subpanel{
+   padding: 0px;
+}
+
+.subpanel>.panel-body {
+   padding-top: 0px;
+   padding-bottom: 0px;
+}
+
+.subpanel>.panel-heading {
+   padding-top: 0px;
+   padding-bottom: 0px;
+}
+
+.subpanel>.panel-body>.form-group{
+   padding-top: 0px;
+   padding-bottom: 0px;
+   margin: 0px;
+}
